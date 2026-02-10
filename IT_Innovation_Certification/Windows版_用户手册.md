@@ -1,0 +1,92 @@
+#                                                                                             Windows用户手册
+
+## 一：引言
+
+​	本文档旨在提供一系列指导信息供用户在Windows操作系统上使用文件内容读取功能库，包括提供安装、配置、使用等方面的指导信息。
+
+## 二：安装
+
+​	1：文件读取库由Rust语言编写而成，所以运行本文件读取库需要搭建Rust环境。
+
+​	（1）：安装Rust编译工具
+
+macOS、Linux 或其它类 Unix 系统要下载 `Rustup` 并安装 Rust，请在终端中运行以下命令:
+
+```
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+​	Windows 要下载 `rustup-init.exe`可执行文件，点击[`此链接`](https://static.rust-lang.org/rustup/dist/i686-pc-windows-gnu/rustup-init.exe)即可下载 `rustup-init.exe`可执行文件。由于Rust 的编译工具依赖 C 语言的编译工具，所以电脑上至少已经存在一个 C 语言的编译环境，这里推荐下载安装 Visual Studio 2013 或以上的环境。
+
+​	下载好Visual Studio之后，就可以点击`rustup-init.exe`可执行文件运行，安装Rust编译工具了。
+
+​	然后进入命令行窗口，有三个选项，输入1并回车，直接进入第二步。接下来步骤，其它属性都选择默认，设置完所有选项后，会回到开始的安装界面，这时我们输入1并回车即可。
+
+​	这时我们可以测试Rust环境是否搭建好，输入命令 `rustc -V` ，`cargo -V`，如果这两个命令能够输出你安装的版本号，那就是安装成功了。
+
+​	（2）：搭建 Visual Studio Code 开发环境
+
+​		点击[`链接`](https://code.visualstudio.com/Download)下载 Visual Studio Code（即 VSCode）,如果已安装则跳过此步骤。 
+
+​		在Visual Studio Code侧边栏`Extensions`，并在搜索框搜索，`rust-analyzer`,`Native Debug`这两个插件并安装
+
+​	2：获取本项目文件读取库，并使用Visual Studio Code打开项目。
+
+​	3：项目所需要的环境及相关依赖信息都保存在`Cargo.toml`文件中，根据文件中的配置信息，在文件夹命令行窗口运行 `cargo build` 即可下载相关依赖。导入库之后，在当前文件目录下运行`Cargo run`命令，即可运行程序。或者进入`main.js`文件，点击`Run`图标，运行程序。
+
+## 三：配置
+
+​	1：src 目录存放项目源代码，test_examples 目录存放测试的例子，test_files 目录存放测试案例的代码文件，lib.rs 文件存放文件读取具体操作相关的代码，main.rs 文件是项目入口，可以在此测试代码。
+
+​	2：文件读取功能库的代码都保存在`lib.rs`文件中，可以点击查看。读取文件内容的各种方法都实现在文件读取结构体中，可以使用结构体中的方法来读取文件内容。每个读取文件内容的方法上方都有详细的文档注释，包括函数功能，参数，返回值，实际使用示例，帮助使用者更好地使用文件读取库。
+
+## 四：使用
+
+使用示例：
+
+​	新建一个文件，后缀名为rs，复制以下代码并保存，点击。然后在项目入口main文件中引入该函数，点击main函数上的图标run或者命令行运行cargo run命令即可运行，得出结果。函数中的参数可以根据实际情况而定。
+
+```
+use FileContentReader::FileReader;
+    /// 读取文本文件内容
+    /// 
+    /// ### 参数
+    /// - `file_path:&str` ： 文件路径
+    /// 
+    /// ### 返回值
+    /// -  `Result<String>`：返回字符串，字符串包含整个TXT文件的内容
+    /// 
+    /// # Examples
+    /// 
+    /// ```
+    /// use FileContentReader::FileReader;
+    /// let res = FileReader::read_txt("src/test_examples/test_txt.txt");
+    /// match res {
+    ///   Ok(content) => println!("文本文件内容: \n {}", content),
+    ///   Err(e) => println!("读取文本文件失败: {}", e), 
+    /// }
+    pub fn read_txt(file_path: &str) -> Result<String> {
+        // 判断文件路径是否存在
+        assert!(fs::metadata(file_path).is_ok(), "文件不存在,请检查路径是否正确");
+        // 判断文件类型是否正确
+        assert!(file_path.ends_with(".txt"), "文件类型错误,请检查文件类型是否为txt文件");
+        //打开文件
+        let file = File::open(file_path)?;
+        // 创建缓冲区
+        let mut reader = BufReader::new(file); // 缓冲器
+        let mut content = String::new();
+        // 将文件内容读入字符串并返回
+        reader.read_to_string(&mut content)?;
+        Ok(content)
+    }
+```
+
+说明：
+
+​	1：使用文件内容读取功能库之前，要先导入库，才能使用读取文件内容的方法。使用`use FileContentReader::FileReader`这一语句来导入文件内容读取功能库，读取文件内容的方法都实现在`FileReader`结构体中。
+
+​	2：使用时，通过调用结构体`FileReader`中具体的文件读取方法即可读取指定文件的内容。例如`FileReader::read_txt`，使用`read_txt`函数来读取TXT文件内容。
+
+​	3：根据函数返回类型，选择合适的方式，获得自己想要的文件内容。
+
+​	4：每个函数的上方都撰写了详细的文档注释，包括函数功能说明，参数，返回值，使用案例，便于用户快速了解，使用函数。具体使用时，通过鼠标移动至函数处，也会显示函数的相关信息，提供用户帮助。
