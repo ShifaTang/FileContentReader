@@ -41,7 +41,7 @@ FileContentReader/
 
 ## Quick Start
 
-- Follow the user_manual ([Chinese](User_Manual/用户手册.md) / [English](User_Manual/user_manual_en.md)) file, you can start qucikly and use our library. If you want to quickly use our library on Windows without any installations, there is a executable file—[FileContentReader.exe](IT_Innovation_Certification\FileContentReader_exe_document) , you can quickly experience all the functions through [FileContentReader_exe_instruction](IT_Innovation_Certification\FileContentReader_exe_document).
+- Follow the user_manual ([Chinese](User_Manual/用户手册.md) / [English](User_Manual/user_manual_en.md)) file, you can start qucikly and use our library. If you want to quickly use our library on Windows without any installations, there is a executable file—[FileContentReader.exe](IT_Innovation_Certification\FileContentReader_exe_document/FileContentReader.exe) , you can quickly experience all the functions through [FileContentReader_exe_instruction](IT_Innovation_Certification\FileContentReader_exe_document/FileContentReader_exe_instruction.docx).
 
 - Most of this project's documentation is provided in Chinese. If you encounter any parts you don't understand, feel free to reach out to me with questions.
 
@@ -50,3 +50,7 @@ FileContentReader/
 https://github.com/ShifaTang/FileContentReader/images/Demo_Video.mp4
 
 https://github.com/ShifaTang/FileContentReader/images/Introduction_Video.mp4
+
+
+
+[![Demo Video](images/poster.jpg)](images/Demo_Video.mp4)
