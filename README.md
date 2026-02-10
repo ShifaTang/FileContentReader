@@ -47,10 +47,7 @@ FileContentReader/
 
 ## Demo Video
 
-https://github.com/ShifaTang/FileContentReader/images/Demo_Video.mp4
+[FileContentReader/images/Demo_Video.mp4 at main · ShifaTang/FileContentReader](https://github.com/ShifaTang/FileContentReader/blob/main/images/Demo_Video.mp4)
 
-https://github.com/ShifaTang/FileContentReader/images/Introduction_Video.mp4
+[FileContentReader/images/Introduction_Video.mp4 at main · ShifaTang/FileContentReader](https://github.com/ShifaTang/FileContentReader/blob/main/images/Introduction_Video.mp4)
 
-
-
-[![Demo Video](images/poster.jpg)](images/Demo_Video.mp4)
